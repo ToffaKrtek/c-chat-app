@@ -30,13 +30,22 @@ set(SOURCES
 # ------------------- Подключение зависимостей ---------------
 include(FetchContent)
 
-# NanoVG (рендеринг)
 FetchContent_Declare(
-    nanovg
-    GIT_REPOSITORY https://github.com/memononen/nanovg.git
-    GIT_TAG        master
+    SDL2
+    GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
+    GIT_TAG        release-2.30.0   # или последний стабильный
 )
-FetchContent_MakeAvailable(nanovg)
+# Перед MakeAvailable добавьте переменную, отключающую PipeWire
+set(SDL_PIPEWIRE OFF CACHE BOOL "Disable PipeWire audio driver" FORCE)
+FetchContent_MakeAvailable(SDL2)
+
+# # NanoVG (рендеринг)
+# FetchContent_Declare(
+#     nanovg
+#     GIT_REPOSITORY https://github.com/memononen/nanovg.git
+#     GIT_TAG        master
+# )
+# FetchContent_MakeAvailable(nanovg)
 
 # Clay (UI, header‑only)
 FetchContent_Declare(
@@ -57,7 +66,6 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 target_link_libraries(${PROJECT_NAME}
     OpenGL::GL
     glfw
-    nanovg
 )
 
 # Clay – header‑only, добавляем путь к заголовкам

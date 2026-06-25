@@ -42,3 +42,16 @@ Test(chat_api, get_chat_error, .init = setup, .fini = teardown) {
   cr_assert(chat == NULL);
   free(chat);
 }
+
+Test(chat_api, chat_get_length_zero_on_error, .init = setup, .fini = teardown) {
+  uint32_t res = chat_get_length(storage, 999);
+  cr_assert(res == 0);
+}
+
+Test(chat_api, chat_has_unread_messages, .init = setup, .fini = teardown) {
+  chat_t *chat = chat_create(storage, "test");
+  bool res = chat_has_unread_messages(storage, chat->id);
+  cr_assert(res == false);
+  free(chat);
+}
+

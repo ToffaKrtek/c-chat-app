@@ -61,4 +61,13 @@ chat_t *chat_get(chat_storage_t *storage, uint32_t id) {
 
 uint32_t chat_get_length(chat_storage_t *storage, uint32_t id) { return 0; }
 
-bool chat_has_unread_messages(chat_storage_t *storage, uint32_t id) { return false; }
+bool chat_has_unread_messages(chat_storage_t *storage, uint32_t id) { 
+  chat_t *chat = chat_get(storage, id);
+  if (!chat) return false;
+  for (uint32_t i = 0; i < chat->message_count; i++) {
+    if (!chat->messages[i].is_read) {
+      return true;
+    }
+  }
+  return false; 
+}
