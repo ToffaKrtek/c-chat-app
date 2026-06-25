@@ -21,6 +21,7 @@ set(SOURCES
 
     # CHAT
     src/chat/chat_api.c
+    src/chat/storage_memory.c
 
     # GUI
     src/gui/layout.c
@@ -101,6 +102,7 @@ endmacro()
 add_module_test(chat
     src/chat/tests/test_chat_api.c
     src/chat/chat_api.c
+    src/chat/storage_memory.c
 )
 
 # add_module_test(gui
