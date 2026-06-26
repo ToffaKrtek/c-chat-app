@@ -127,6 +127,17 @@ static chat_t* memory_get_chat(chat_storage_t* self, uint32_t id) {
   return backend->chats[idx];
 }
 
+static bool memory_get_chats(chat_storage_t* self, chat_t* out, uint32_t* count) {
+  if (out == NULL || count == NULL) return false;
+  memory_backend_t* backend = (memory_backend_t*)self->backend_data;
+  uint32_t available = backend->chat_count;
+  uint32_t to_copy = available > *count ? *count : available;
+  for (uint32_t i = 0; i < to_copy; i++) {
+    out[i] = *(backend->chats[i]);
+  }
+  *count = to_copy;
+  return true;
+}
 // CHAT
 
 static const storage_v_table_t memory_vtable = {
@@ -137,6 +148,7 @@ static const storage_v_table_t memory_vtable = {
     .chat_count = memory_chat_count,
     .delete_chat = memory_delete_chat,
     .get_chat = memory_get_chat,
+    .get_chats = memory_get_chats,
 
     // MESSAGE
     .create_message = memory_create_message,

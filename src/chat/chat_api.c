@@ -47,3 +47,8 @@ bool chat_has_unread_messages(chat_storage_t* storage, uint32_t id) {
   }
   return false;
 }
+
+int chat_get_all(chat_storage_t* storage, chat_t* out, uint32_t* count) {
+  bool res = storage->vtable->get_chats(storage, out, count);
+  return res ? EXIT_SUCCESS : EXIT_FAILURE;
+}
