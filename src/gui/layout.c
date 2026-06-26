@@ -6,15 +6,15 @@
 #define CLAY_IMPLEMENTATION
 #include "clay/clay.h"
 
-static GLFWwindow *window = NULL;
+static GLFWwindow* window = NULL;
 static int window_width = 1200;
 static int window_height = 720;
 
-static void error_callback(int error, const char *description) {
+static void error_callback(int error, const char* description) {
   fprintf(stderr, "GLFW Error: %s\n", description);
 }
 
-static void mouse_button_callback(GLFWwindow *window, int button, int action,
+static void mouse_button_callback(GLFWwindow* window, int button, int action,
                                   int mods) {
   double x, y;
   glfwGetCursorPos(window, &x, &y);
@@ -22,7 +22,7 @@ static void mouse_button_callback(GLFWwindow *window, int button, int action,
                        action == GLFW_PRESS);
 }
 
-static void scroll_callback(GLFWwindow *window, double xoffset,
+static void scroll_callback(GLFWwindow* window, double xoffset,
                             double yoffset) {
   Clay_UpdateScrollContainers(
       true, (Clay_Vector2){(float)xoffset, (float)yoffset}, 0.1);
@@ -51,7 +51,7 @@ int run_app(void) {
   glfwSetScrollCallback(window, scroll_callback);
 
   uint32_t min_size = Clay_MinMemorySize();
-  void *memory = malloc(min_size);
+  void* memory = malloc(min_size);
   if (!memory) {
     fprintf(stderr, "Failed to allocate memory\n");
     glfwDestroyWindow(window);
@@ -60,7 +60,7 @@ int run_app(void) {
   }
   Clay_Arena arena = Clay_CreateArenaWithCapacityAndMemory(min_size, memory);
 
-  Clay_Context *ctx = Clay_Initialize(
+  Clay_Context* ctx = Clay_Initialize(
       arena, (Clay_Dimensions){(float)window_width, (float)window_height},
       (Clay_ErrorHandler){.errorHandlerFunction = NULL});
   if (!ctx) {

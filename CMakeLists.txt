@@ -21,6 +21,7 @@ set(SOURCES
 
     # CHAT
     src/chat/chat_api.c
+    src/chat/message_api.c
     src/chat/storage_memory.c
 
     # GUI
@@ -109,7 +110,9 @@ endmacro()
 # Теперь для каждого модуля вызываем макрос
 add_module_test(chat
     src/chat/tests/test_chat_api.c
+    src/chat/tests/test_message_api.c
     src/chat/chat_api.c
+    src/chat/message_api.c
     src/chat/storage_memory.c
 )
 
