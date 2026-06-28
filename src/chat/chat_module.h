@@ -14,7 +14,7 @@ chat_storage_t* chat_storage_new_sqlite(const char* filename);
 chat_storage_t* chat_storage_new_memory(void);
 void chat_storage_free(chat_storage_t* storage);
 
-//MESSAGE
+// MESSAGE
 typedef struct {
   bool is_sender;
   bool is_read;
@@ -28,9 +28,9 @@ chat_message_t* chat_create_message(chat_storage_t* storage, bool is_sender,
 int chat_delete_message(chat_storage_t* storage, uint32_t chat_id, uint32_t id);
 int chat_read_message(chat_storage_t* storage, uint32_t chat_id, uint32_t id);
 int chat_update_message(chat_storage_t* storage, const chat_message_t* message);
-//MESSAGE
+// MESSAGE
 
-//CHAT
+// CHAT
 typedef struct {
   uint32_t id;
   uint32_t message_count;
@@ -44,6 +44,6 @@ chat_t* chat_get(chat_storage_t* storage, uint32_t id);
 int chat_get_all(chat_storage_t* storage, chat_t* out, uint32_t* count);
 bool chat_has_unread_messages(chat_storage_t* storage, uint32_t id);
 uint32_t chat_get_length(chat_storage_t* storage, uint32_t id);
-//CHAT
+// CHAT
 
 #endif  // !CHAT_H

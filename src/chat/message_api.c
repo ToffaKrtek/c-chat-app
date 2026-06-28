@@ -41,7 +41,8 @@ int chat_read_message(chat_storage_t* storage, uint32_t chat_id, uint32_t id) {
   return res;
 }
 
-int chat_update_message(chat_storage_t* storage, const chat_message_t* message) {
+int chat_update_message(chat_storage_t* storage,
+                        const chat_message_t* message) {
   return storage->vtable->update_message(storage, message) ? EXIT_SUCCESS
-                                                          : EXIT_FAILURE;
+                                                           : EXIT_FAILURE;
 }

@@ -36,10 +36,7 @@ int32_t find_msg_idx(chat_storage_t* self, int32_t chat_idx, uint32_t msg_idx) {
 // HELPERS
 //
 // CORE
-static bool memory_open(chat_storage_t* self,
-                        const char* url) { 
-  return true;
-}
+static bool memory_open(chat_storage_t* self, const char* url) { return true; }
 static void memory_close(chat_storage_t* self) { free(self->backend_data); }
 // CORE
 //
@@ -127,7 +124,8 @@ static chat_t* memory_get_chat(chat_storage_t* self, uint32_t id) {
   return backend->chats[idx];
 }
 
-static bool memory_get_chats(chat_storage_t* self, chat_t* out, uint32_t* count) {
+static bool memory_get_chats(chat_storage_t* self, chat_t* out,
+                             uint32_t* count) {
   if (out == NULL || count == NULL) return false;
   memory_backend_t* backend = (memory_backend_t*)self->backend_data;
   uint32_t available = backend->chat_count;
